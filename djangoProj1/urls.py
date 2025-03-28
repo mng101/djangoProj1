@@ -20,3 +20,17 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+# Use include() to add URLS from the test1 application and authentication system
+from django.urls import include
+
+urlpatterns += [
+    path('test1/', include('app1.urls')),
+]
+
+# Add URL maps to redirect the base URL to our test1 application
+from django.views.generic import RedirectView
+urlpatterns += [
+    path('', RedirectView.as_view(url='/app1/', permanent=True)),
+]
+
